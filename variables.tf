@@ -13,6 +13,12 @@ variable "s3_bucket_prefix" {
   description = "Path inside the bucket where emails will be stored"
 }
 
+variable "scan_enabled" {
+  type        = bool
+  default     = true
+  description = "Enable email scanning"
+}
+
 variable "mail_sender" {
   type        = string
   description = "Email used to send messages from (when forwarding)"

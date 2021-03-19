@@ -117,7 +117,7 @@ resource "aws_ses_receipt_rule" "fw" {
   rule_set_name = local.rule_set_name
   recipients    = [var.mail_sender]
   enabled       = true
-  scan_enabled  = false
+  scan_enabled  = var.scan_enabled
 
   depends_on = [aws_ses_receipt_rule_set.fw_rules]
 
