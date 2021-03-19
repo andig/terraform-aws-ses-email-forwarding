@@ -119,6 +119,8 @@ resource "aws_ses_receipt_rule" "fw" {
   enabled       = true
   scan_enabled  = false
 
+  depends_on = [aws_ses_receipt_rule_set.fw_rules]
+
   s3_action {
     bucket_name       = var.s3_bucket
     object_key_prefix = "${var.s3_bucket_prefix}/"
@@ -155,6 +157,8 @@ resource "aws_s3_bucket" "bucket" {
 
 resource "aws_s3_bucket_policy" "bucket_policy" {
   bucket = var.s3_bucket
+
+  depends_on = [aws_s3_bucket.bucket]
 
   policy = <<EOF
 {
