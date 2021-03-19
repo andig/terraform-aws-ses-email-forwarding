@@ -149,6 +149,10 @@ resource "aws_ses_domain_dkim" "dkim" {
 
 /** Bucket Components */
 
+resource "aws_s3_bucket" "bucket" {
+    bucket = var.s3_bucket
+}
+
 resource "aws_s3_bucket_policy" "bucket_policy" {
   bucket = var.s3_bucket
 
