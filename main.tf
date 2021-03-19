@@ -138,9 +138,10 @@ resource "aws_ses_domain_dkim" "dkim" {
   domain = aws_ses_domain_identity.domain.domain
 }
 
-resource "aws_ses_domain_identity_verification" "verification" {
-  domain = aws_ses_domain_identity.domain.id
+# resource "aws_ses_domain_identity_verification" "verification" {
+#   domain = aws_ses_domain_identity.domain.id
 
-  depends_on = [cloudflare_record.verification]
-}
+#   depends_on = [cloudflare_record.verification]
+# }
+
 
