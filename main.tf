@@ -147,3 +147,34 @@ resource "aws_ses_domain_dkim" "dkim" {
 # }
 
 
+/** Bucket Components */
+
+resource "aws_s3_bucket_policy" "bucket_policy" {
+  bucket = var.s3_bucket
+
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "S3Access",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "ses.amazonaws.com"
+            },
+            "Action": [
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::${var.s3_bucket}/${var.s3_bucket_prefix}/*"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "aws:Referer": "${data.aws_caller_identity.current.account_id}"
+                }
+            }
+        }
+    ]
+}
+EOF
+}
